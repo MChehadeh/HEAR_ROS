@@ -90,16 +90,26 @@ class InterfaceFactory<JsonWrapper> : public InterfaceFactoryBase{
 
 public:
 InterfaceFactory(){
-    this->setController(new SysConnController());
+
 }
 template <class U>
-SystemConnectorAsync<U>* createClient(std::string uri){
-    return new SystemConnectorAsync<U>(uri);
+JsonWrapperClient<U>* createClient(std::string uri){
+    return new JsonWrapperClient<U>(uri);
 }
 template <class U>
-SystemConnectorAsync<U>* createServer(std::string uri){
-    return new SystemConnectorAsync<U>(uri);
+JsonWrapperServer<U>* createServer(std::string uri){
+    return new JsonWrapperServer<U>(uri);
 }
+
+template <class U>
+JsonWrapperSubscriber<U>* createSubscriber(std::string uri){
+    return new JsonWrapperSubscriber<U>(uri);
+}
+template <class U>
+JsonWrapperPublisher<U>* createPublisher(std::string uri){
+    return new JsonWrapperPublisher<U>(uri);
+}
+
 };
 
 

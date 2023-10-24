@@ -21,7 +21,7 @@ void Update() override {
 }
 
 void callbackPerform(const std::tuple<size_t,char*> data_received) override{
-    cout << "Data Received is : " << std::get<1>(data_received) << endl;
+    // cout << "Data Received is : " << std::get<1>(data_received) << endl;
 
     Json_Wrapper JW;
     string msg = std::get<1>(data_received);

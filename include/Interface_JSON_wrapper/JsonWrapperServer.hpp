@@ -14,7 +14,6 @@ public:
     JsonWrapperServer(std::string _name){
         this->updateInstanceDescription(_name);
         name=_name;
-        inp=createAsyncInputPort<T>(IP::INPUT_ASYNC, "Input");
         out=createAsyncOutputPort<T>(OP::OUTPUT_ASYNC,"Output");
     }
     
@@ -24,7 +23,6 @@ public:
     void processAsync() override {
         if (inp->wasUpdated_AsyncIP()){
             T data;
-            inp->read_AsyncIP(data);
             out->write_AsyncOP(data);
         }
     }
