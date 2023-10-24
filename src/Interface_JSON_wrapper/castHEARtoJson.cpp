@@ -48,16 +48,7 @@ template <> void castHEARtoJson<MRFT_parameters>(json& j,MRFT_parameters& data)
     j.AddMember("no_switch_delay_in_ms", data.no_switch_delay_in_ms, allocator);
     j.AddMember("num_of_peak_conf_samples", data.num_of_peak_conf_samples, allocator);
 }
-// template <typename T>
-// void loadRapidJsonArray(std::vector<T> &input, rapidjson::Document::AllocatorType &allocator, rapidjson::Value &output)
-// {
 
-//     for (int i = 0; i < input.size(); i++)
-//     {
-//         // printf("item\n");
-//         output.PushBack(input[i], allocator);
-//     }
-// }
 template <> void castHEARtoJson<Trajectory_parameters>(json& j,Trajectory_parameters& data) 
 {
     // std::tie(j["_trajectoryType"], j["_samplingType"], j["_transformationType"], j["scale"], j["rot"], j["trans"], j["TotalExecutionTime"], j["Velocity"],j["ClearQ"]) = 
