@@ -12,6 +12,13 @@
 
 #include "Interface_motive_natnet/NatNetMotiveController.hpp"
 
+#include "Interface_JSON_wrapper/JsonWrapperIOController.hpp"
+#include "Interface_JSON_wrapper/JsonWrapperClient.hpp"
+#include "Interface_JSON_wrapper/JsonWrapperPublisher.hpp"
+#include "Interface_JSON_wrapper/JsonWrapperServer.hpp"
+#include "Interface_JSON_wrapper/JsonWrapperSubscriber.hpp"
+
+
 #include <string>
 
 namespace HEAR{
@@ -94,20 +101,20 @@ InterfaceFactory(){
 }
 template <class U>
 JsonWrapperClient<U>* createClient(std::string uri){
-    return new JsonWrapperClient<U>(uri);
+    return new JsonWrapperClient<U>(uri,(JsonWrapperIOController*)this->getController());
 }
 template <class U>
 JsonWrapperServer<U>* createServer(std::string uri){
-    return new JsonWrapperServer<U>(uri);
+    return new JsonWrapperServer<U>(uri,(JsonWrapperIOController*)this->getController());
 }
 
 template <class U>
 JsonWrapperSubscriber<U>* createSubscriber(std::string uri){
-    return new JsonWrapperSubscriber<U>(uri);
+    return new JsonWrapperSubscriber<U>(uri,(JsonWrapperIOController*)this->getController());
 }
 template <class U>
 JsonWrapperPublisher<U>* createPublisher(std::string uri){
-    return new JsonWrapperPublisher<U>(uri);
+    return new JsonWrapperPublisher<U>(uri,(JsonWrapperIOController*)this->getController());
 }
 
 };

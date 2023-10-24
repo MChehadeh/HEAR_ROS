@@ -19,13 +19,14 @@ public:
     
     void process() override {
         T data;
-        inp->read_AsyncIP(data);
-        out->write_AsyncOP(data);
+        out->write(data);
     }
     void processAsync() override {
 
     }
-
+    void reset() override{
+        
+    }
     std::string getTypeDescription(){
         return "JsonWrapperSubscriber";
     }

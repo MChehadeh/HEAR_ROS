@@ -21,12 +21,12 @@ public:
 
     }
     void processAsync() override {
-        if (inp->wasUpdated_AsyncIP()){
-            T data;
-            out->write_AsyncOP(data);
-        }
+        T data;
+        out->write_AsyncOP(data);
     }
-
+    void reset() override{
+        
+    }
     std::string getTypeDescription(){
         return "JsonWrapperServer";
     }
