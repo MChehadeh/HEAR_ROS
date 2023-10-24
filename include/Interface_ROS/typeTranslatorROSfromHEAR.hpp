@@ -7,6 +7,7 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/Int32.h>
 #include <geometry_msgs/Point.h>
+#include <geometry_msgs/QuaternionStamped.h>
 #include <hear_msgs/set_bool.h>
 #include <hear_msgs/set_int.h>
 #include <hear_msgs/set_float.h>
@@ -104,6 +105,11 @@ struct ROSTopicTypeTranslator<float> {
 template <>
 struct ROSTopicTypeTranslator<Vector3D<float>> {
     using ROSType = geometry_msgs::Point;
+};
+
+template <>
+struct ROSTopicTypeTranslator<tf2::Quaternion> {
+    using ROSType = geometry_msgs::QuaternionStamped;
 };
 
 template <>
