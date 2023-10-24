@@ -64,7 +64,17 @@ template <> void castJsonToHEAR<MRFT_parameters>(json& j,MRFT_parameters& data)
 
 
 }
+//template <typename T>
+// void loadVectorArray(rapidjson::Value &jsonArray, std::vector<T> &output)
+// {
 
+//     for (auto it = jsonArray.Begin(); it != jsonArray.End(); it++)
+//     {
+//         // printf("item\n");
+//         auto value = it->template Get<T>();
+//         output.emplace_back(value);
+//     }
+// }
 template <> void castJsonToHEAR<Trajectory_parameters>(json& j,Trajectory_parameters& data) 
 { 
     // data._trajectoryType=j["_trajectoryType"];

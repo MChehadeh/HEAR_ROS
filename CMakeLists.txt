@@ -16,7 +16,7 @@ include_directories(
     include
     ${catkin_INCLUDE_DIRS}
     ${hear_INCLUDE_DIRS}
-    ${FC_util_INCLUDE_DIRS}    
+    ${FC_util_INCLUDE_DIRS}
 )
 
 set(${PROJECT_NAME}_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
