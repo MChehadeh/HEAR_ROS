@@ -26,4 +26,5 @@ namespace HEAR {
         data->temperature,
         data->fields_updated);
     }
+    //TODO AA: add serializers for other messages
 }

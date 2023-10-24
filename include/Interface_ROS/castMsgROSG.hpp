@@ -19,6 +19,13 @@
 #include <hear_msgs/Update_Controller_PID.h>
 #include <hear_msgs/Update_Trajectory.h>
 
+#include <mavros_msgs/VehicleAttitude.h>
+#include <mavros_msgs/VehicleAngularVelocity.h>
+#ifdef PX4
+    #include <mavros_msgs/VehicleAttitude.h>
+    #include <mavros_msgs/VehicleAngularVelocity.h>
+#endif
+
 namespace HEAR {
 
 template <typename T,typename U> void castMsgToROS(T& data_from,U& data_to) 
@@ -48,9 +55,11 @@ template <> void castMsgToROS<MRFT_parameters,hear_msgs::Update_Controller_MRFT>
 
 template <> void castMsgToROS<PID_parameters,hear_msgs::Update_Controller_PID>(PID_parameters& data_from,hear_msgs::Update_Controller_PID& data_to) ;
 
-template <> void castMsgToROS<Trajectory_parameters,hear_msgs::Update_Trajectory>(Trajectory_parameters& data_from,hear_msgs::Update_Trajectory& data_to) ;
+#ifdef PX4
+template <> void castMsgToROS<PX4_MAVROS_Vehicle_Att_data,mavros_msgs::VehicleAttitude>(PX4_MAVROS_Vehicle_Att_data& data_from,mavros_msgs::VehicleAttitude& data_to) ;
 
-
+template <> void castMsgToROS<PX4_MAVROS_Vehicle_Ang_Vel_data,mavros_msgs::VehicleAngularVelocity>(PX4_MAVROS_Vehicle_Ang_Vel_data& data_from,mavros_msgs::VehicleAngularVelocity& data_to) ;
+#endif
 
 
 template <typename T,typename U> void castMsgFromROS(T& data_from,U& data_to) 
@@ -58,22 +67,8 @@ template <typename T,typename U> void castMsgFromROS(T& data_from,U& data_to)
     throw std::runtime_error("Invalid castMsgFromROS function signature in ROSUnit_Client");
 }
 
-}
-// template <typename T> 
-// void castMsgToROS(T& data_from) 
-// { 
-//     throw std::runtime_error("Invalid castMsgToROS function signature in ROSUnit_Client");
-//     }
-// template <> std_srvs::Empty castMsgToROS<void>(void& data_from) 
-// { 
-//     std_srvs::Empty msg;
-//     return msg;
-// }
 
-// template <> hear_msgs::set_bool castMsgToROS<bool>(bool& data_from) 
-// { 
-//     hear_msgs::set_bool msg;
-//     msg.request.data = data_from; 
-//     return msg;
-// }
+
+}
+
 

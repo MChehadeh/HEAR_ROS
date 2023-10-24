@@ -29,6 +29,8 @@ public:
         
     }
 
+    void reset() override {}
+
     std::string getTypeDescription(){
         return "SystemConnectorSync";
     }

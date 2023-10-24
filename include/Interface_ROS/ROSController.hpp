@@ -7,9 +7,9 @@ class ROSController: public InterfaceController {
 public:
 ros::NodeHandle nh;
 ros::NodeHandle pnh;
-bool en_ros_nodelet=false;
+bool en_ros_spinning=false;
 void Update() override {
-    if (!en_ros_nodelet){
+    if (!en_ros_spinning){
         ros::spinOnce();
     }
 }

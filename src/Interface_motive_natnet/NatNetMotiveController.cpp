@@ -14,10 +14,16 @@ void NatNetMotiveController::Update() { //Process the data received from the cal
     }
 }
 
-void NatNetMotiveController::callbackPerform(char* data){
+void NatNetMotiveController::callbackPerform(std::tuple<size_t, char *> data){
     std::vector<OptiTrackRigidBodyData> rigid_bodies;
-    Unpack((char*)data,rigid_bodies);
+    Unpack((char*)std::get<1>(data),rigid_bodies);
     rigid_bodies_shmem.writeSharedData(rigid_bodies);
+    for (auto rgbdy : rigid_bodies){
+        std::cout << "Rigid Body received, id:" << rgbdy.id << ", pos: " <<rgbdy.pos.x << ","<<
+    rgbdy.pos.y << ","<< rgbdy.pos.z << ", quat: " << rgbdy.quat.getW() << ","<< 
+    rgbdy.quat.getX() << ","<< rgbdy.quat.getY() << ","<< rgbdy.quat.getZ() <<std::endl;
+    }
+    
 }
 
 NatNetMotiveController::~NatNetMotiveController(){

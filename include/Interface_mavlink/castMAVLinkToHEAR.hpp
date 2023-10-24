@@ -16,4 +16,5 @@ namespace HEAR {
             decoded_data->push_back(hil_actuator_controls.controls[i]);
         }
     }
+    //TODO AA: add the other MAVLink messages here
 }

@@ -31,7 +31,7 @@ void callbackPerform(const std::tuple<size_t,char*> data_received) override{
     //string par = JW.dump(jsonData);
     this->callCallbackByKey(uri,str_paload);
     //Implement
-    // auto json_data=convertToJson(std::get<0>(data_received),std::get<1>(data_received)); 
+    // auto json_data=convertToJson(std::get<0>(data_received),std::get<1>(data_received)); // json_data -> uri,data_type,payload
     
 }
 

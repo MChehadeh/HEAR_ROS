@@ -20,11 +20,19 @@
 #include "HEAR_core/DataTypes.hpp"
 #include "HEAR_core/Vector3D.hpp"
 
+#include <stdexcept>
+
+#ifdef PX4
+    #include <mavros_msgs/VehicleAttitude.h>
+    #include <mavros_msgs/VehicleAngularVelocity.h>
+#endif
+
 namespace HEAR {
 
 
 template <typename T>
 struct ROSServiceTypeTranslator {
+    // throw std::runtime_error("Invalid ROSServiceTypeTranslator function signature"); TODO: find a way to throw an error (possible constexpr)
     using ROSType = T;
 };
 
@@ -102,7 +110,17 @@ template <>
 struct ROSTopicTypeTranslator<std::vector<float>> {
     using ROSType = std_msgs::Float32MultiArray;
 };
+#ifdef PX4
+template <>
+struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Att_data> {
+    using ROSType = mavros_msgs::VehicleAttitude;
+};
 
+template <>
+struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Ang_Vel_data> {
+    using ROSType = mavros_msgs::VehicleAngularVelocity;
+};
+#endif
 }
 // int main() {
 //     using OriginalType = int;
