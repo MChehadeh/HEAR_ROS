@@ -5,30 +5,30 @@
 
 namespace HEAR {
 template <typename T>
-class JsonWrapperServer : public Block {
-    AsyncOutputPort<T>* out;
+class JsonWrapperSubscriber : public Block {
+    OutputPort<T>* out;
     std::string name;
 public:
-    enum OP{OUTPUT_ASYNC};
+    enum OP{OUTPUT};
 
-    JsonWrapperServer(std::string _name){
+    JsonWrapperSubscriber(std::string _name){
         this->updateInstanceDescription(_name);
         name=_name;
-        out=createAsyncOutputPort<T>(OP::OUTPUT_ASYNC,"Output");
+        out=createAsyncOutputPort<T>(OP::OUTPUT,"Output");
     }
     
     void process() override {
-
+        T data;
+        out->write(data);
     }
     void processAsync() override {
-        T data;
-        out->write_AsyncOP(data);
+
     }
     void reset() override{
         
     }
     std::string getTypeDescription(){
-        return "JsonWrapperServer";
+        return "JsonWrapperSubscriber";
     }
 
 

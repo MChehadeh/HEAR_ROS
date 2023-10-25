@@ -67,7 +67,7 @@ public:
 
     void reset() override{}
 
-    std::string getTypeDescription(){
+    std::string getTypeDescription() override{
         return "ROSUnit_Publisher";
     }
 

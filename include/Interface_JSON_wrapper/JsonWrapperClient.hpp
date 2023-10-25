@@ -31,11 +31,13 @@ public:
             auto data_json_payload= castHEARToJson(data);
             std::string data_type_desc=HEARTypetoString<T>();
             // Form the message
-            auto data_json=wrapJson();
-            io_ctrl->writeJsonToIO(data_json);
+            // auto data_json=wrapJson();
+            // io_ctrl->writeJsonToIO(data_json);
         }
     }
-
+    void reset() override{
+        
+    }
     std::string getTypeDescription(){
         return "JsonWrapperClient";
     }

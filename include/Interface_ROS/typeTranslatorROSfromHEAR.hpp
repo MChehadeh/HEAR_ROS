@@ -109,6 +109,11 @@ struct ROSTopicTypeTranslator<Vector3D<float>> {
 };
 
 template <>
+struct ROSTopicTypeTranslator<tf2::Quaternion> {
+    using ROSType = geometry_msgs::QuaternionStamped;
+};
+
+template <>
 struct ROSTopicTypeTranslator<std::vector<float>> {
     using ROSType = std_msgs::Float32MultiArray;
 };
