@@ -5,8 +5,11 @@ namespace HEAR {
     template <typename T> void serializeMessage(T* data, mavlink_message_t &msg_data){
         throw std::runtime_error("Invalid serializeMessage function signature in MAVLink_Publisher");
     }
+    //TODO AA: remove component and system id
     template<> void serializeMessage(mavlink_hil_sensor_t* data, mavlink_message_t &msg_data){
         uint8_t id = 0; // Set the value of the id parameter here
+        uint8_t system_id = 1;
+        uint8_t component_id = 0x33;
         mavlink_msg_hil_sensor_pack(system_id,
         component_id,
         &msg_data,
@@ -29,8 +32,10 @@ namespace HEAR {
     }
 
     //TODO AA: add serializers for other messages
-    template<> void serializeMessage(mavlink_vision_position_estimate_t* data, uint8_t system_id, uint8_t component_id, mavlink_message_t &msg_data){
+    template<> void serializeMessage(mavlink_vision_position_estimate_t* data, mavlink_message_t &msg_data){
         uint8_t id = 0; // Set the value of the id parameter here
+        uint8_t system_id = 1;
+        uint8_t component_id = 0x33;
         mavlink_msg_vision_position_estimate_pack(system_id,
         component_id,
         &msg_data,
@@ -46,8 +51,10 @@ namespace HEAR {
     }
 
     //TODO AA: Do we need to create custom data types, or can we directly use the defined structs
-    template<> void serializeMessage(mavlink_hil_state_quaternion_t* data, uint8_t system_id, uint8_t component_id, mavlink_message_t &msg_data){
+    template<> void serializeMessage(mavlink_hil_state_quaternion_t* data, mavlink_message_t &msg_data){
         uint8_t id = 0; // Set the value of the id parameter here
+        uint8_t system_id = 1;
+        uint8_t component_id = 0x33;
         mavlink_msg_hil_state_quaternion_pack(system_id,
         component_id,
         &msg_data,
@@ -70,8 +77,10 @@ namespace HEAR {
     }
 
 
-    template<> void serializeMessage(mavlink_system_time_t* data, uint8_t system_id, uint8_t component_id, mavlink_message_t &msg_data){
+    template<> void serializeMessage(mavlink_system_time_t* data, mavlink_message_t &msg_data){
         uint8_t id = 0; // Set the value of the id parameter here
+        uint8_t system_id = 1;
+        uint8_t component_id = 0x33;
         mavlink_msg_system_time_pack(system_id,
         component_id,
         &msg_data,
@@ -79,8 +88,10 @@ namespace HEAR {
         data->time_boot_ms);
     }
 
-    template<> void serializeMessage(mavlink_heartbeat_t* data, uint8_t system_id, uint8_t component_id, mavlink_message_t &msg_data){
+    template<> void serializeMessage(mavlink_heartbeat_t* data, mavlink_message_t &msg_data){
         uint8_t id = 0; // Set the value of the id parameter here
+        uint8_t system_id = 1;
+        uint8_t component_id = 0x33;        
         mavlink_msg_heartbeat_pack(system_id,
         component_id,
         &msg_data,
