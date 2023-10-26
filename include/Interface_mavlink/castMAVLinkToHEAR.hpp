@@ -17,5 +17,8 @@ namespace HEAR {
             decoded_data->push_back(hil_actuator_controls.controls[i]);
         }
     }
-    //TODO AA: add the other MAVLink messages here
+
+    template <> void castMAVLinkToHEAR(mavlink_message_t* data,mavlink_heartbeat_t* heartbeat_data,uint8_t msg_id){
+        mavlink_msg_heartbeat_decode(data, heartbeat_data);
+    }
 }
