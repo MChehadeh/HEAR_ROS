@@ -5,6 +5,7 @@
 #include "HEAR_core/CallbackG.hpp"
 
 #include "Interface_mavlink/MAVLinkController.hpp"
+#include "Interface_mavlink/castMAVLinkToHEAR.hpp"
 
 #include <sstream>
 

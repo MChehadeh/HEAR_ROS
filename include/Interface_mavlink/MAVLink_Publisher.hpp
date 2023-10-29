@@ -5,6 +5,7 @@
 #include "HEAR_core/Port.hpp"
 
 #include "Interface_mavlink/MAVLinkController.hpp"
+#include "Interface_mavlink/MAVLink_Serializer.hpp"
 
 namespace HEAR{
 
@@ -27,7 +28,7 @@ public:
         mavlink_message_t msg;
         T buff;
         ((InputPort<T>*)_input_port)->read(buff);
-        serializeMessage(buff, msg);
+        serializeMessage(&buff, msg);
         if_ctrl->writeMAVLinkMsgToIO(msg);
     }
 

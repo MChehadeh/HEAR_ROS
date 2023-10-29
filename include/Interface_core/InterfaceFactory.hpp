@@ -6,6 +6,9 @@
 #include "Interface_ROS/ROSUnit_Subscriber.hpp"
 #include "Interface_ROS/ROSUnit_Publisher.hpp"
 
+#include "Interface_mavlink/MAVLink_Publisher.hpp"
+#include "Interface_mavlink/MAVLink_Subscriber.hpp"
+
 #include "Interface_system_connector/SysConnController.hpp"
 #include "Interface_system_connector/SystemConnectorAsync.hpp"
 #include "Interface_system_connector/SystemConnectorSync.hpp"
