@@ -190,6 +190,17 @@ template <> void castMsgFromROS<hear_msgs::Update_Trajectory,Trajectory_paramete
      data_to.ClearQ =data_from.request.trajectory_parameters.ClearQ;
 }
 
+template <> void castMsgFromROS<geometry_msgs::Vector3Stamped,Vector3D<float>>(geometry_msgs::Vector3Stamped& data_from,Vector3D<float>& data_to){
+    data_to.x = data_from.vector.x;
+    data_to.y = data_from.vector.y;
+    data_to.z = data_from.vector.z;
+}
+
+template <> void castMsgFromROS<geometry_msgs::QuaternionStamped,tf2::Quaternion>(geometry_msgs::QuaternionStamped& data_from,tf2::Quaternion& data_to){
+    data_to = tf2::Quaternion(data_from.quaternion.x, data_from.quaternion.y, data_from.quaternion.z, data_from.quaternion.w);
+}
+
+//TODO AA: remove below and mavros dependancy
 template <> void castMsgFromROS<mavros_msgs::VehicleAttitude,PX4_MAVROS_Vehicle_Att_data>(mavros_msgs::VehicleAttitude& data_from,PX4_MAVROS_Vehicle_Att_data& data_to){
     // data_to.att_quat=tf2::Quaternion(data_from->q_x, data_from->q_y, data_from->q_z, data_from->q_w );
 }
