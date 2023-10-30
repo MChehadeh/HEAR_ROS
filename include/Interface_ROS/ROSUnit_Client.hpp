@@ -48,10 +48,9 @@ public:
     enum IP {INPUT_ASYNC};
     ros::ServiceClient m_client;
 
-    ROSUnit_Client(InterfaceController* if_ctrl, std::string t_name){
+    ROSUnit_Client(ROSController* ros_ctrl, std::string t_name){
         this->updateInstanceDescription(t_name);
         using ROS_type=typename ROSServiceTypeTranslator<T>::ROSType;
-        ROSController* ros_ctrl = (ROSController*)if_ctrl;
         m_client = ros_ctrl->nh.serviceClient<ROS_type>(t_name);
         async_ip=this->createAsyncInputPort<T>(IP::INPUT_ASYNC,"INPUT_ASYNC");
         this->block_att->block_func=BlockNodeAttributes::Sink;

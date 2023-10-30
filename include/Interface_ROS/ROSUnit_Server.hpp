@@ -55,10 +55,9 @@ ros::ServiceServer m_server;
 AsyncOutputPort<T>* async_op;
 public:
 enum OP {OUTPUT_ASYNC};
-ROSUnit_Server(InterfaceController* if_ctrl, std::string topic){
+ROSUnit_Server(ROSController* ros_ctrl, std::string topic){
     this->updateInstanceDescription(topic);
     this->setTopic(topic);
-    ROSController* ros_ctrl = (ROSController*)if_ctrl;
     m_server = ros_ctrl->nh.advertiseService(topic, &ROSUnit_Server::callback, this);
     async_op=this->createAsyncOutputPort<T>(OP::OUTPUT_ASYNC,"OUTPUT_ASYNC");
     this->block_att->block_func=BlockNodeAttributes::Source;
