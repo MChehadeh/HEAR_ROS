@@ -2,6 +2,21 @@
 #include "Json/JsonHelperFunctions.hpp"
 
 namespace HEAR{
+
+//     template <> void castHEARtoJson<std::tuple<double, double, double, double, double, double, double>>(json& j,std::tuple<double, double, double, double, double, double, double>& data) 
+// { 
+
+//     j.SetObject();
+//     rapidjson::Document::AllocatorType& allocator = j.GetAllocator();
+//     //j.AddMember("id", data.id, allocator);
+//     j.AddMember("T_1", std::get<0>(data), allocator);
+//     j.AddMember("T_2", std::get<1>(data), allocator);
+//     j.AddMember("tau", std::get<2>(data), allocator);
+//     j.AddMember("Kp", std::get<3>(data), allocator);
+//     j.AddMember("Kd", std::get<4>(data), allocator);
+//     j.AddMember("Ki", std::get<5>(data), allocator);
+//     j.AddMember("K_proc", std::get<6>(data), allocator);
+// }
     
 template <> void castHEARtoJson<PID_parameters>(json& j,PID_parameters& data) 
 { 

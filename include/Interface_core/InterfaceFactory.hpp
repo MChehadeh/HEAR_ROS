@@ -20,6 +20,9 @@
 
 
 #include <string>
+#include <iostream>
+using namespace std;
+
 
 namespace HEAR{
 //These are for InterfaceFactory type specialization:
