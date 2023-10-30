@@ -9,6 +9,8 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/Int32.h>
 #include <geometry_msgs/Point.h>
+#include <geometry_msgs/Vector3Stamped.h>
+#include <geometry_msgs/QuaternionStamped.h>
 #include <hear_msgs/set_bool.h>
 #include <hear_msgs/set_int.h>
 #include <hear_msgs/set_float.h>
@@ -68,6 +70,36 @@ template <typename T,typename U> void castMsgFromROS(T& data_from,U& data_to)
 }
 
 
+template <> void castMsgFromROS<std_srvs::Empty::Request,int>(std_srvs::Empty::Request& data_from,int& data_to);
+
+
+template <> void castMsgFromROS<hear_msgs::set_bool::Request,bool>(hear_msgs::set_bool::Request& data_from, bool& data_to);
+
+template <> void castMsgFromROS<hear_msgs::set_int::Request,int>(hear_msgs::set_int::Request& data_from,int& data_to);
+
+template <> void castMsgFromROS<hear_msgs::set_float::Request,float>(hear_msgs::set_float::Request& data_from,float& data_to);
+
+template <> void castMsgFromROS<std_msgs::Float32,float>(std_msgs::Float32& data_from,float& data_to);
+
+template <> void castMsgFromROS<hear_msgs::set_point,Vector3D<float>>(hear_msgs::set_point& data_from,Vector3D<float>& data_to);
+
+template <> void castMsgFromROS<Vector3D<float>,geometry_msgs::Point>(Vector3D<float>& data_from,geometry_msgs::Point& data_to);
+
+template <> void castMsgFromROS<std_msgs::Float32MultiArray,std::vector<float>>(std_msgs::Float32MultiArray& data_from,std::vector<float>& data_to);
+
+template <> void castMsgFromROS<hear_msgs::Update_Controller_Bounding,BoundingCtrl_parameters>(hear_msgs::Update_Controller_Bounding& data_from,BoundingCtrl_parameters& data_to);
+
+template <> void castMsgFromROS<hear_msgs::Update_Controller_MRFT,MRFT_parameters>(hear_msgs::Update_Controller_MRFT& data_from,MRFT_parameters& data_to);
+
+template <> void castMsgFromROS<hear_msgs::Update_Controller_PID,PID_parameters>(hear_msgs::Update_Controller_PID& data_from,PID_parameters& data_to);
+
+template <> void castMsgFromROS<hear_msgs::Update_Trajectory,Trajectory_parameters>(hear_msgs::Update_Trajectory& data_from,Trajectory_parameters& data_to);
+
+#ifdef PX4
+template <> void castMsgFromROS<mavros_msgs::VehicleAttitude,PX4_MAVROS_Vehicle_Att_data>(mavros_msgs::VehicleAttitude& data_from,PX4_MAVROS_Vehicle_Att_data& data_to);
+
+template <> void castMsgFromROS<mavros_msgs::VehicleAngularVelocity,PX4_MAVROS_Vehicle_Ang_Vel_data>(mavros_msgs::VehicleAngularVelocity& data_from,PX4_MAVROS_Vehicle_Ang_Vel_data& data_to);
+#endif
 
 }
 

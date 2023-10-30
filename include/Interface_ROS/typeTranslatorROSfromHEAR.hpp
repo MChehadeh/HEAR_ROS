@@ -17,6 +17,7 @@
 #include <hear_msgs/PID_param.h>
 #include <hear_msgs/Update_Controller_PID.h>
 #include <hear_msgs/Update_Trajectory.h>
+#include "tf2/LinearMath/Quaternion.h"
 
 #include "HEAR_core/DataTypes.hpp"
 #include "HEAR_core/Vector3D.hpp"
@@ -116,6 +117,8 @@ template <>
 struct ROSTopicTypeTranslator<std::vector<float>> {
     using ROSType = std_msgs::Float32MultiArray;
 };
+
+
 #ifdef PX4
 template <>
 struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Att_data> {

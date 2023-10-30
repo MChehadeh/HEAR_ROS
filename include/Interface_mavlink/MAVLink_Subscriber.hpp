@@ -5,6 +5,9 @@
 #include "HEAR_core/CallbackG.hpp"
 
 #include "Interface_mavlink/MAVLinkController.hpp"
+#include "Interface_mavlink/castMAVLinkToHEAR.hpp"
+
+#include <sstream>
 
 namespace HEAR{
 
@@ -18,9 +21,11 @@ protected:
 public:
     enum OP {OUTPUT};
 
-    MAVLink_Subscriber(MAVLinkController* if_ctrl_para, const std::string& topic,uint8_t msg_id_para ){
+    MAVLink_Subscriber(MAVLinkController* if_ctrl_para,uint8_t msg_id_para ){
         if_ctrl=if_ctrl_para;
-        this->updateInstanceDescription(topic);
+        std::stringstream ss;
+        ss << "MAVLink_Subscriber for Msg ID: "<<msg_id_para;
+        this->updateInstanceDescription(ss.str());
         msg_id=msg_id_para;
         if_ctrl->registerKeyedCallback(msg_id_para,this);
         _output_port=this->createOutputPort<T>(OP::OUTPUT,"OUTPUT");

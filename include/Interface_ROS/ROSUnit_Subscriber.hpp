@@ -51,10 +51,9 @@ protected:
 public:
     enum OP {OUTPUT};
 
-    ROSUnit_Subscriber(InterfaceController* if_ctrl, const std::string& topic){
+    ROSUnit_Subscriber(ROSController* ros_ctrl, const std::string& topic){
         this->updateInstanceDescription(topic);
         using ROS_type=typename ROSTopicTypeTranslator<T>::ROSType;
-        ROSController* ros_ctrl = (ROSController*)if_ctrl;
         sub_ = ros_ctrl->nh.subscribe<ROS_type>(topic, 10, &ROSUnit_Subscriber::callback, this);
         _output_port=this->createOutputPort<T>(OP::OUTPUT,"OUTPUT");
         this->block_att->block_func=BlockNodeAttributes::Source;

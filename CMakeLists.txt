@@ -27,13 +27,14 @@ file(GLOB ${PROJECT_NAME}_SRCs
 ${HEAR_ROS_SOURCE_DIR}/Interface_ROS/*.cpp
 ${HEAR_ROS_SOURCE_DIR}/Interface_motive_natnet/*.cpp
 ${HEAR_ROS_SOURCE_DIR}/Interface_JSON_wrapper/*.cpp
+${HEAR_ROS_SOURCE_DIR}/Interface_mavlink/*.cpp
 )
 
 # # add_library(${PROJECT_NAME} ${HEAR_ROS_SRCs} ${HEAR_SRCs})
 
 add_library(${PROJECT_NAME} STATIC ${HEAR_ROS_SRCs})
 
-add_dependencies(${PROJECT_NAME} hear_msgs_generate_messages_cpp)
+add_dependencies(${PROJECT_NAME} hear_msgs_generate_messages_cpp hear)
 
 set_target_properties(${PROJECT_NAME}
                       PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -42,7 +43,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC hear ${mavros_msgs_LIBRARIES})
 
 set(${PROJECT_NAME}_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/include CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)
 
-message(HEAR_ROS_SOURCE_DIR="${HEAR_ROS_SOURCE_DIR}")
+message(HEAR_util_INCLUDE_DIRS="${HEAR_util_INCLUDE_DIRS}")
 
 
 set(${PROJECT_NAME}_LIBS ${catkin_LIBRARIES})

@@ -6,6 +6,9 @@
 #include "Interface_ROS/ROSUnit_Subscriber.hpp"
 #include "Interface_ROS/ROSUnit_Publisher.hpp"
 
+#include "Interface_mavlink/MAVLink_Publisher.hpp"
+#include "Interface_mavlink/MAVLink_Subscriber.hpp"
+
 #include "Interface_system_connector/SysConnController.hpp"
 #include "Interface_system_connector/SystemConnectorAsync.hpp"
 #include "Interface_system_connector/SystemConnectorSync.hpp"
@@ -30,6 +33,7 @@ class ROS{};
 class ROS2{};
 class SystemConnector{};
 class JsonWrapper{};
+class MAVLink{};
 
 class InterfaceFactoryBase {
 private:
@@ -53,19 +57,19 @@ class InterfaceFactory<ROS> : public InterfaceFactoryBase{
 public:
 template <class U>
 ROSUnit_Client<U>* createClient(std::string uri){
-    return new ROSUnit_Client<U>(this->getController(),uri);
+    return new ROSUnit_Client<U>((ROSController*)this->getController(),uri);
 }
 template <class U>
 ROSUnit_Server<U>* createServer(std::string uri){
-    return new ROSUnit_Server<U>(this->getController(),uri);
+    return new ROSUnit_Server<U>((ROSController*)this->getController(),uri);
 }
 template <class U>
 ROSUnit_Subscriber<U>* createSubscriber(std::string uri){
-    return new ROSUnit_Subscriber<U>(this->getController(),uri);
+    return new ROSUnit_Subscriber<U>((ROSController*)this->getController(),uri);
 }
 template <class U>
 ROSUnit_Publisher<U>* createPublisher(std::string uri){
-    return new ROSUnit_Publisher<U>(this->getController(),uri);
+    return new ROSUnit_Publisher<U>((ROSController*)this->getController(),uri);
 }
 };
 
@@ -121,6 +125,26 @@ JsonWrapperPublisher<U>* createPublisher(std::string uri){
 }
 
 };
+
+//Interface Factory for MAVLink
+template <>
+class InterfaceFactory<MAVLink> : public InterfaceFactoryBase{
+
+public:
+InterfaceFactory(){
+
+}
+template <class U>
+MAVLink_Subscriber<U>* createSubscriber(uint8_t msg_id_para){
+    return new MAVLink_Subscriber<U>((MAVLinkController*)this->getController(),msg_id_para);
+}
+template <class U>
+MAVLink_Publisher<U>* createPublisher(std::string uri){
+    return new MAVLink_Publisher<U>((MAVLinkController*)this->getController(),uri);
+}
+
+};
+
 
 
 }
