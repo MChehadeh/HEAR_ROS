@@ -27,6 +27,7 @@ class ROS{};
 class ROS2{};
 class SystemConnector{};
 class JsonWrapper{};
+class MAVLink{};
 
 class InterfaceFactoryBase {
 private:
@@ -118,6 +119,26 @@ JsonWrapperPublisher<U>* createPublisher(std::string uri){
 }
 
 };
+
+//Interface Factory for MAVLink
+template <>
+class InterfaceFactory<MAVLink> : public InterfaceFactoryBase{
+
+public:
+InterfaceFactory(){
+
+}
+template <class U>
+MAVLink_Subscriber<U>* createSubscriber(uint8_t msg_id_para){
+    return new MAVLink_Subscriber<U>((MAVLinkController*)this->getController(),msg_id_para);
+}
+template <class U>
+MAVLink_Publisher<U>* createPublisher(std::string uri){
+    return new MAVLink_Publisher<U>((MAVLinkController*)this->getController(),uri);
+}
+
+};
+
 
 
 }
