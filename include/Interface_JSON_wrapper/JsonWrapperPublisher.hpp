@@ -59,7 +59,7 @@ template <class T>
 void JsonWrapperPublisher<T>::process(){
     T data;
     inp->read(data);
-    
+    io_ctrl->writeJsonToIO(data);
 
 }
 
