@@ -43,8 +43,15 @@ template <> void castMsgToROS<Vector3D<float>,geometry_msgs::Point>(Vector3D<flo
 
 template <> void castMsgToROS<std::vector<float>,std_msgs::Float32MultiArray>(std::vector<float>& data_from,std_msgs::Float32MultiArray& data_to) 
 { 
-    throw std::logic_error("Function not yet implemented");
+    // throw std::logic_error("Function not yet implemented");
     //data_to.request.data=data_from;
+
+    data_to.data.clear();
+    
+    for (const auto& value : data_from)
+    {
+        data_to.data.push_back(value);
+    }
 }
 
 template <> void castMsgToROS<BoundingCtrl_parameters,hear_msgs::Update_Controller_Bounding>(BoundingCtrl_parameters& data_from,hear_msgs::Update_Controller_Bounding& data_to) 
