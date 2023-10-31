@@ -13,9 +13,5 @@ namespace HEAR {
     template <> void castMAVLinkToHEAR(mavlink_message_t* data, mavlink_heartbeat_t* heartbeat_data){
         mavlink_msg_heartbeat_decode(data, heartbeat_data);
     }
-    
-    template <> void castMAVLinkToHEAR(mavlink_message_t* data, mavlink_hil_sensor_t* sensor_data){
-        mavlink_msg_hil_sensor_decode(data, sensor_data);
-    }
 
 }
