@@ -38,7 +38,8 @@ void writeMAVLinkMsgToIO(mavlink_message_t& msg){
     int len = mavlink_msg_to_send_buffer(buffer, &msg);
     io_writer->writeData(len,(char*)buffer);
 }
-
+/// @brief Only constructor for MAVLinkController class
+/// @param io_writer_para is IOWriter pointer like 
 MAVLinkController(IOWriter* io_writer_para) : io_writer(io_writer_para) {}
 
 ~MAVLinkController(){}
