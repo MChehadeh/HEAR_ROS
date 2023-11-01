@@ -17,7 +17,7 @@ protected:
     MAVLinkController* if_ctrl;
     OutputPort<T>* _output_port;
     uint8_t msg_id;
-    T data;
+    
 public:
     enum OP {OUTPUT};
 
@@ -33,11 +33,13 @@ public:
     }
 
     void callbackPerform(mavlink_message_t msg){
+        T data;
         castMAVLinkToHEAR(&msg,&data);
+        _output_port->write(data);
     }
 
     void process() override{
-        _output_port->write(data);
+        
     }
 
     void processAsync() override{}
