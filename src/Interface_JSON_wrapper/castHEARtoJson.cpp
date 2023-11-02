@@ -1,3 +1,4 @@
+#ifdef VCPKG
 #include "Interface_JSON_wrapper/castHEARtoJson.hpp"
 #include "Json/JsonHelperFunctions.hpp"
 
@@ -94,3 +95,4 @@ template <> void castHEARtoJson<Trajectory_parameters>(json& j,Trajectory_parame
 }
 
 }
+#endif
