@@ -1,3 +1,4 @@
+#ifdef VCPKG
 #pragma once
 
 #include "Json/JsonHelperFunctions.hpp"
@@ -29,3 +30,4 @@ template <> void castJsonToHEAR<float>(json& j,float& data,std::string _field_na
 template <> void castJsonToHEAR<std::vector<float>>(json& j,std::vector<float>& data,std::string _field_name) ;
 
 }
+#endif

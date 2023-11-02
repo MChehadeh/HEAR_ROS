@@ -1,3 +1,4 @@
+#ifdef VCPKG
 #pragma once
 
 #include "HEAR_core/Block.hpp"
@@ -47,3 +48,4 @@ public:
 };
 
 }
+#endif

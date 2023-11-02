@@ -1,3 +1,4 @@
+#ifdef VCPKG
 #pragma once
 #include <tuple>
 #include <string>
@@ -53,3 +54,5 @@ JsonWrapperIOController(IOWriter* io_writer_para) : io_writer(io_writer_para) {}
 
 };
 }
+
+#endif

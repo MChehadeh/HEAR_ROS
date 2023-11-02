@@ -1,3 +1,4 @@
+#ifdef VCPKG
 #pragma once
 
 #include <string>
@@ -19,3 +20,4 @@ template <> void castHEARtoJson<MRFT_parameters>(json& j,MRFT_parameters& data);
 template <> void castHEARtoJson<Trajectory_parameters>(json& j,Trajectory_parameters& data);
 
 }
+#endif

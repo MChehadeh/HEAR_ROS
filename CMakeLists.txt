@@ -24,10 +24,14 @@ set(${PROJECT_NAME}_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 file(GLOB ${PROJECT_NAME}_SRCs 
 ${HEAR_ROS_SOURCE_DIR}/Interface_ROS/*.cpp
 ${HEAR_ROS_SOURCE_DIR}/Interface_motive_natnet/*.cpp
-${HEAR_ROS_SOURCE_DIR}/Interface_JSON_wrapper/*.cpp
 ${HEAR_ROS_SOURCE_DIR}/Interface_mavlink/*.cpp
 )
-
+##### VCPKG #####
+if(VCPKG) 
+  file(GLOB VCPKG_cpps ${HEAR_ROS_SOURCE_DIR}/Interface_JSON_wrapper/*.cpp)
+  list(APPEND ${PROJECT_NAME}_SRCs ${VCPKG_cpps})
+endif() 
+##### VCPKG #####
 # # add_library(${PROJECT_NAME} ${HEAR_ROS_SRCs} ${HEAR_SRCs})
 
 add_library(${PROJECT_NAME} STATIC ${HEAR_ROS_SRCs})

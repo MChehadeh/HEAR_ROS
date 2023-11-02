@@ -15,12 +15,13 @@
 
 #include "Interface_motive_natnet/NatNetMotiveController.hpp"
 
+#ifdef VCPKG
 #include "Interface_JSON_wrapper/JsonWrapperIOController.hpp"
 #include "Interface_JSON_wrapper/JsonWrapperClient.hpp"
 #include "Interface_JSON_wrapper/JsonWrapperPublisher.hpp"
 #include "Interface_JSON_wrapper/JsonWrapperServer.hpp"
 #include "Interface_JSON_wrapper/JsonWrapperSubscriber.hpp"
-
+#endif
 
 #include <string>
 #include <iostream>
@@ -98,7 +99,7 @@ SystemConnectorSync<U>* createPublisher(std::string uri){
 }
 };
 
-
+#ifdef VCPKG
 template <>
 class InterfaceFactory<JsonWrapper> : public InterfaceFactoryBase{
 
@@ -125,7 +126,7 @@ JsonWrapperPublisher<U>* createPublisher(std::string uri){
 }
 
 };
-
+#endif
 //Interface Factory for MAVLink
 template <>
 class InterfaceFactory<MAVLink> : public InterfaceFactoryBase{

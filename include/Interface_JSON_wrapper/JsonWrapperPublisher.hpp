@@ -1,3 +1,4 @@
+#ifdef VCPKG
 #ifndef JsonWrapperPublisher_HPP
 #define JsonWrapperPublisher_HPP
 
@@ -88,4 +89,5 @@ void JsonWrapperPublisher<T>::reset(){
 // }
 }
 
+#endif
 #endif
