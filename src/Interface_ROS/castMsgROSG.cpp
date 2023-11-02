@@ -98,16 +98,6 @@ template <> void castMsgToROS<Trajectory_parameters,hear_msgs::Update_Trajectory
     data_to.request.trajectory_parameters.ClearQ = data_from.ClearQ;
 }
 
-//TODO AA: remove below
-template <> void castMsgToROS<PX4_MAVROS_Vehicle_Att_data,mavros_msgs::VehicleAttitude>(PX4_MAVROS_Vehicle_Att_data& data_from,mavros_msgs::VehicleAttitude& data_to){
-    // data_from.att_quat=tf2::Quaternion(data_to->q_x, data_to->q_y, data_to->q_z, data_to->q_w );
-}
-
-template <> void castMsgToROS<PX4_MAVROS_Vehicle_Ang_Vel_data,mavros_msgs::VehicleAngularVelocity>(PX4_MAVROS_Vehicle_Ang_Vel_data& data_from,mavros_msgs::VehicleAngularVelocity& data_to){
-
-}
-
-
 
 
 template <> void castMsgFromROS<std_srvs::Empty::Request,int>(std_srvs::Empty::Request& data_from,int& data_to) 
@@ -210,14 +200,6 @@ template <> void castMsgFromROS<geometry_msgs::QuaternionStamped::ConstPtr,tf2::
     data_to = tf2::Quaternion(data_from->quaternion.x, data_from->quaternion.y, data_from->quaternion.z, data_from->quaternion.w);
 }
 
-//TODO AA: remove below and mavros dependancy
-template <> void castMsgFromROS<mavros_msgs::VehicleAttitude,PX4_MAVROS_Vehicle_Att_data>(mavros_msgs::VehicleAttitude& data_from,PX4_MAVROS_Vehicle_Att_data& data_to){
-    // data_to.att_quat=tf2::Quaternion(data_from->q_x, data_from->q_y, data_from->q_z, data_from->q_w );
-}
-
-template <> void castMsgFromROS<mavros_msgs::VehicleAngularVelocity,PX4_MAVROS_Vehicle_Ang_Vel_data>(mavros_msgs::VehicleAngularVelocity& data_from,PX4_MAVROS_Vehicle_Ang_Vel_data& data_to){
-    
-}
     
 }
 

@@ -24,10 +24,6 @@
 
 #include <stdexcept>
 
-#ifdef PX4
-    #include <mavros_msgs/VehicleAttitude.h>
-    #include <mavros_msgs/VehicleAngularVelocity.h>
-#endif
 
 namespace HEAR {
 
@@ -118,19 +114,6 @@ struct ROSTopicTypeTranslator<std::vector<float>> {
     using ROSType = std_msgs::Float32MultiArray;
 };
 
-//TODO AA remove below
-#ifdef PX4
-template <>
-struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Att_data> {
-    using ROSType = mavros_msgs::VehicleAttitude;
-};
-
-template <>
-struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Ang_Vel_data> {
-    using ROSType = mavros_msgs::VehicleAngularVelocity;
-};
-#endif
-}
 
 // int main() {
 //     using OriginalType = int;
