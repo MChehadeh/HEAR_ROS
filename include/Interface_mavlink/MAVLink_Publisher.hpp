@@ -1,10 +1,10 @@
 #pragma once
 
 #include <sstream>
+#include "Interface_mavlink/MAVLinkController.hpp"
 #include "HEAR_core/DataTypes.hpp"
 #include "HEAR_core/Port.hpp"
 
-#include "Interface_mavlink/MAVLinkController.hpp"
 #include "Interface_mavlink/MAVLink_Serializer.hpp"
 
 namespace HEAR{

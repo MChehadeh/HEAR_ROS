@@ -56,7 +56,7 @@ struct ROSServiceTypeTranslator<bool> {
 
 template <>
 struct ROSServiceTypeTranslator<Vector3D<float>> {
-    using ROSType = geometry_msgs::Point;
+    using ROSType = hear_msgs::set_point;
 };
 
 template <>
@@ -114,6 +114,7 @@ struct ROSTopicTypeTranslator<std::vector<float>> {
     using ROSType = std_msgs::Float32MultiArray;
 };
 
+}
 
 // int main() {
 //     using OriginalType = int;
