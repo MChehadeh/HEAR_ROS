@@ -118,7 +118,7 @@ struct ROSTopicTypeTranslator<std::vector<float>> {
     using ROSType = std_msgs::Float32MultiArray;
 };
 
-
+//TODO AA remove below
 #ifdef PX4
 template <>
 struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Att_data> {
@@ -131,6 +131,7 @@ struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Ang_Vel_data> {
 };
 #endif
 }
+
 // int main() {
 //     using OriginalType = int;
 //     using Translator = TypeTranslator<OriginalType>;

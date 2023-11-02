@@ -15,6 +15,8 @@ namespace HEAR {
     template <> void serializeMessage(mavlink_system_time_t* data, mavlink_message_t &msg_data);
     
     template <> void serializeMessage(mavlink_heartbeat_t* data, mavlink_message_t &msg_data);
+    
+    // template <> void serializeMessage(mavlink_actuator_motors_t* data, mavlink_message_t &msg_data);
 
     /* 
     //TODO AA: remove component and system id

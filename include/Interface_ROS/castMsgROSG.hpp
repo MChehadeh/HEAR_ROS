@@ -45,6 +45,7 @@ template <> void castMsgToROS<float,hear_msgs::set_float>(float& data_from,hear_
 
 template <> void castMsgToROS<float,std_msgs::Float32>(float& data_from,std_msgs::Float32& data_to);
 
+//TODO AA check this
 template <> void castMsgToROS<Vector3D<float>,hear_msgs::set_point>(Vector3D<float>& data_from,hear_msgs::set_point& data_to);
 
 template <> void castMsgToROS<Vector3D<float>,geometry_msgs::Point>(Vector3D<float>& data_from,geometry_msgs::Point& data_to);
@@ -57,11 +58,13 @@ template <> void castMsgToROS<MRFT_parameters,hear_msgs::Update_Controller_MRFT>
 
 template <> void castMsgToROS<PID_parameters,hear_msgs::Update_Controller_PID>(PID_parameters& data_from,hear_msgs::Update_Controller_PID& data_to) ;
 
+//TODO AA remove below
 #ifdef PX4
 template <> void castMsgToROS<PX4_MAVROS_Vehicle_Att_data,mavros_msgs::VehicleAttitude>(PX4_MAVROS_Vehicle_Att_data& data_from,mavros_msgs::VehicleAttitude& data_to) ;
 
 template <> void castMsgToROS<PX4_MAVROS_Vehicle_Ang_Vel_data,mavros_msgs::VehicleAngularVelocity>(PX4_MAVROS_Vehicle_Ang_Vel_data& data_from,mavros_msgs::VehicleAngularVelocity& data_to) ;
 #endif
+
 
 
 template <typename T,typename U> void castMsgFromROS(T& data_from,U& data_to) 
@@ -79,21 +82,26 @@ template <> void castMsgFromROS<hear_msgs::set_int::Request,int>(hear_msgs::set_
 
 template <> void castMsgFromROS<hear_msgs::set_float::Request,float>(hear_msgs::set_float::Request& data_from,float& data_to);
 
-template <> void castMsgFromROS<std_msgs::Float32,float>(std_msgs::Float32& data_from,float& data_to);
+template <> void castMsgFromROS<std_msgs::Float32::ConstPtr,float>(std_msgs::Float32::ConstPtr& data_from,float& data_to);
 
-template <> void castMsgFromROS<hear_msgs::set_point,Vector3D<float>>(hear_msgs::set_point& data_from,Vector3D<float>& data_to);
+//TODO AA: revert this
+template <> void castMsgFromROS<hear_msgs::set_point::Request,Vector3D<float>>(hear_msgs::set_point::Request& data_from,Vector3D<float>& data_to);
 
-template <> void castMsgFromROS<Vector3D<float>,geometry_msgs::Point>(Vector3D<float>& data_from,geometry_msgs::Point& data_to);
+template <> void castMsgFromROS<geometry_msgs::Point::ConstPtr, Vector3D<float>>(geometry_msgs::Point::ConstPtr& data_from,Vector3D<float>& data_to);
 
-template <> void castMsgFromROS<std_msgs::Float32MultiArray,std::vector<float>>(std_msgs::Float32MultiArray& data_from,std::vector<float>& data_to);
+template <> void castMsgFromROS<std_msgs::Float32MultiArray::ConstPtr,std::vector<float>>(std_msgs::Float32MultiArray::ConstPtr& data_from,std::vector<float>& data_to);
 
-template <> void castMsgFromROS<hear_msgs::Update_Controller_Bounding,BoundingCtrl_parameters>(hear_msgs::Update_Controller_Bounding& data_from,BoundingCtrl_parameters& data_to);
+template <> void castMsgFromROS<hear_msgs::Update_Controller_Bounding::Request,BoundingCtrl_parameters>(hear_msgs::Update_Controller_Bounding::Request& data_from,BoundingCtrl_parameters& data_to);
 
-template <> void castMsgFromROS<hear_msgs::Update_Controller_MRFT,MRFT_parameters>(hear_msgs::Update_Controller_MRFT& data_from,MRFT_parameters& data_to);
+template <> void castMsgFromROS<hear_msgs::Update_Controller_MRFT::Request,MRFT_parameters>(hear_msgs::Update_Controller_MRFT::Request& data_from,MRFT_parameters& data_to);
 
-template <> void castMsgFromROS<hear_msgs::Update_Controller_PID,PID_parameters>(hear_msgs::Update_Controller_PID& data_from,PID_parameters& data_to);
+template <> void castMsgFromROS<hear_msgs::Update_Controller_PID::Request,PID_parameters>(hear_msgs::Update_Controller_PID::Request& data_from,PID_parameters& data_to);
 
-template <> void castMsgFromROS<hear_msgs::Update_Trajectory,Trajectory_parameters>(hear_msgs::Update_Trajectory& data_from,Trajectory_parameters& data_to);
+template <> void castMsgFromROS<hear_msgs::Update_Trajectory::Request,Trajectory_parameters>(hear_msgs::Update_Trajectory::Request& data_from,Trajectory_parameters& data_to);
+
+template <> void castMsgFromROS<geometry_msgs::QuaternionStamped::ConstPtr,tf2::Quaternion>(geometry_msgs::QuaternionStamped::ConstPtr& data_from,tf2::Quaternion& data_to);
+
+// TODO AA: remove below definitions
 
 #ifdef PX4
 template <> void castMsgFromROS<mavros_msgs::VehicleAttitude,PX4_MAVROS_Vehicle_Att_data>(mavros_msgs::VehicleAttitude& data_from,PX4_MAVROS_Vehicle_Att_data& data_to);

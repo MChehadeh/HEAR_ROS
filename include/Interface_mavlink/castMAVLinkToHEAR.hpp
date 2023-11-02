@@ -12,6 +12,12 @@ namespace HEAR {
     template <> void castMAVLinkToHEAR(mavlink_message_t* data, std::vector<float>* decoded_data);
     
     template <> void castMAVLinkToHEAR(mavlink_message_t* data, mavlink_heartbeat_t* heartbeat_data);
+    
+    // template <> void castMAVLinkToHEAR(mavlink_message_t* data, mavlink_vehicle_local_position_t* position_data); //TODO AA: check why is this not defined?????????????????
+
+    // template <> void castMAVLinkToHEAR(mavlink_message_t* data, mavlink_vehicle_angular_velocity_t* angular_velocity_data);
+    
+    // template <> void castMAVLinkToHEAR(mavlink_message_t* data, mavlink_vehicle_attitude_t* attitude_data);
 
     /* 
     //TODO AA: Check how is hte message type enforced?

@@ -14,4 +14,17 @@ namespace HEAR {
         mavlink_msg_heartbeat_decode(data, heartbeat_data);
     }
 
+    // template <> void castMAVLinkToHEAR(mavlink_message_t* data, mavlink_vehicle_local_position_t* position_data){
+    //     mavlink_msg_vehicle_local_position_decode(data, position_data);
+    // }
+
+    // template <> void castMAVLinkToHEAR(mavlink_message_t* data, mavlink_vehicle_angular_velocity_t* angular_velocity_data){
+    //     mavlink_msg_vehicle_angular_velocity_decode(data, angular_velocity_data);
+    // }
+    
+    // template <> void castMAVLinkToHEAR(mavlink_message_t* data, mavlink_vehicle_attitude_t* attitude_data){
+    //     mavlink_msg_vehicle_attitude_decode(data, attitude_data);
+    // }
+
+
 }
