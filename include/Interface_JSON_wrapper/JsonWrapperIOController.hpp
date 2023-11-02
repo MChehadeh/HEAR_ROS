@@ -8,7 +8,7 @@
 #include "sync_io_drivers/IOWriter.hpp"
 #include "Json/Json_Wrapper.hpp"
 
-using namespace std;
+// using namespace std;
 namespace HEAR{
 class JsonWrapperIOController: public InterfaceController, public CallbackG<std::tuple<size_t,char*>>, public CallerKeyed<std::string,std::string> {
 private:
@@ -27,10 +27,10 @@ void callbackPerform(const std::tuple<size_t,char*> data_received) override{
     //cout << "Data Received from callbackPerform is : " << std::get<1>(data_received) << endl;
 
     Json_Wrapper JW;
-    string msg = std::get<1>(data_received);
+    std::string msg = std::get<1>(data_received);
     const auto [uri, msg_type, strigified_Paylaod] = JW.deWrap_msg(msg);
-    string str_paload = strigified_Paylaod;
-    cout << "str_paload from callbackPerform is : " << str_paload << endl;
+    std::string str_paload = strigified_Paylaod;
+    std::cout << "str_paload from callbackPerform is : " << str_paload << std::endl;
 
     //json jsonData = JW.parse(str_paload);
     //string par = JW.dump(jsonData);
