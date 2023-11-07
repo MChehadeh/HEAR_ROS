@@ -1,5 +1,5 @@
 #pragma once
-#include "mavlink.h"
+#include "mavlink/common/mavlink.h"
 #include <stdexcept>
 namespace HEAR {
     template <typename T> void serializeMessage(T* data, mavlink_message_t &msg_data){

@@ -7,7 +7,7 @@
 #include "HEAR_core/CallerKeyed.hpp"
 #include "sync_io_drivers/IOWriter.hpp"
 
-#include "mavlink.h"
+#include "mavlink/common/mavlink.h"
 
 namespace HEAR{
 class MAVLinkController: public InterfaceController, public CallbackG<std::tuple<size_t,char*>>, public CallerKeyed<int,mavlink_message_t> {

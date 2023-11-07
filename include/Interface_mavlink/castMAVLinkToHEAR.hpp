@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mavlink.h"
+#include "mavlink/common/mavlink.h"
 #include <stdexcept>
 #include <vector>
 

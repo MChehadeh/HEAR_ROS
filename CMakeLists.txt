@@ -5,6 +5,7 @@ project(HEAR_ROS C CXX)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  std_srvs
   hear_msgs
   geometry_msgs
   tf2_geometry_msgs
@@ -36,7 +37,7 @@ endif()
 
 add_library(${PROJECT_NAME} STATIC ${HEAR_ROS_SRCs})
 
-add_dependencies(${PROJECT_NAME} hear_msgs_generate_messages_cpp hear)
+add_dependencies(${PROJECT_NAME} HEAR_util hear_msgs_generate_messages_cpp hear)
 
 set_target_properties(${PROJECT_NAME}
                       PROPERTIES POSITION_INDEPENDENT_CODE ON)
