@@ -5,7 +5,7 @@ namespace HEAR {
 std::string NatNetMotive_Subscriber::getTypeDescription(){
     return "NatNetMotiveSubscriber";
 }
-NatNetMotive_Subscriber::NatNetMotive_Subscriber(int rigid_body_id,NatNetMotiveController* motive_ctrl_para){
+NatNetMotive_Subscriber::NatNetMotive_Subscriber(NatNetMotiveController* motive_ctrl_para, int rigid_body_id){
     motive_ctrl=motive_ctrl_para;
     motive_ctrl_para->registerKeyedCallback(rigid_body_id,this);
     _output_port_position=this->createOutputPort<Vector3D<float>>(OP::OUTPUT_POS,"OUTPUT_POS");
