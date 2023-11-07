@@ -35,6 +35,7 @@ class ROS2{};
 class SystemConnector{};
 class JsonWrapper{};
 class MAVLink{};
+class NatNetMotive{};
 
 class InterfaceFactoryBase {
 private:
@@ -146,6 +147,19 @@ MAVLink_Publisher<U>* createPublisher(std::string uri){
 
 };
 
+
+
+class InterfaceFactory<NatNetMotive> : public InterfaceFactoryBase{
+
+public:
+InterfaceFactory(){
+
+}
+template <class U>
+NatNetMotive_Subscriber<U>* createSubscriber(int rigid_body_id){
+    return new NatNetMotive_Subscriber<U>((NatNetMotiveController*)this->getController(),rigid_body_id);
+}
+};
 
 
 }
