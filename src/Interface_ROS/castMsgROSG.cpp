@@ -99,7 +99,14 @@ template <> void castMsgToROS<Trajectory_parameters,hear_msgs::Update_Trajectory
 }
 
 template <> void castMsgToROS<Pose_data,geometry_msgs::PoseStamped>(Pose_data& data_from,geometry_msgs::PoseStamped& data_to){
-    //TODO: Hazem implement
+    data_to.pose.position.x = data_from.position.x;
+    data_to.pose.position.y = data_from.position.y;
+    data_to.pose.position.z = data_from.position.z;
+
+    data_to.pose.orientation.x = data_from.quat.getX();
+    data_to.pose.orientation.y = data_from.quat.getY();
+    data_to.pose.orientation.z = data_from.quat.getZ();
+    data_to.pose.orientation.w = data_from.quat.getW();
 }
 
 
@@ -205,7 +212,14 @@ template <> void castMsgFromROS<geometry_msgs::QuaternionStamped::ConstPtr,tf2::
 }
 
 template <> void castMsgFromROS<geometry_msgs::PoseStamped,Pose_data>(geometry_msgs::PoseStamped& data_from,Pose_data& data_to){
-    // TODO: hazem implement
+    data_to.position.x = data_from.pose.position.x;
+    data_to.position.y = data_from.pose.position.y;
+    data_to.position.z = data_from.pose.position.z;
+
+    data_to.quat.setX(data_from.pose.orientation.x);
+    data_to.quat.setY(data_from.pose.orientation.y);
+    data_to.quat.setZ(data_from.pose.orientation.z);
+    data_to.quat.setW(data_from.pose.orientation.w);
 }
 
     

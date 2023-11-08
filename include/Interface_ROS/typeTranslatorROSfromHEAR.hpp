@@ -8,6 +8,7 @@
 #include <std_msgs/Int32.h>
 #include <geometry_msgs/Point.h>
 #include <geometry_msgs/QuaternionStamped.h>
+#include <geometry_msgs/PoseStamped.h>
 #include <hear_msgs/set_bool.h>
 #include <hear_msgs/set_int.h>
 #include <hear_msgs/set_float.h>
