@@ -155,7 +155,6 @@ public:
 InterfaceFactory(){
 
 }
-template <class U>
 NatNetMotive_Subscriber* createSubscriber(int rigid_body_id){
     return new NatNetMotive_Subscriber((NatNetMotiveController*)this->getController(),rigid_body_id);
 }

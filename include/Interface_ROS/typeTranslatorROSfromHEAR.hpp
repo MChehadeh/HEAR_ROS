@@ -114,6 +114,11 @@ struct ROSTopicTypeTranslator<std::vector<float>> {
     using ROSType = std_msgs::Float32MultiArray;
 };
 
+template <>
+struct ROSTopicTypeTranslator<Pose_data> {
+    using ROSType = geometry_msgs::PoseStamped;
+};
+
 }
 
 // int main() {

@@ -98,6 +98,10 @@ template <> void castMsgToROS<Trajectory_parameters,hear_msgs::Update_Trajectory
     data_to.request.trajectory_parameters.ClearQ = data_from.ClearQ;
 }
 
+template <> void castMsgToROS<Pose_data,geometry_msgs::PoseStamped>(Pose_data& data_from,geometry_msgs::PoseStamped& data_to){
+    //TODO: Hazem implement
+}
+
 
 
 template <> void castMsgFromROS<std_srvs::Empty::Request,int>(std_srvs::Empty::Request& data_from,int& data_to) 
@@ -198,6 +202,10 @@ template <> void castMsgFromROS<hear_msgs::Update_Trajectory::Request,Trajectory
 
 template <> void castMsgFromROS<geometry_msgs::QuaternionStamped::ConstPtr,tf2::Quaternion>(geometry_msgs::QuaternionStamped::ConstPtr& data_from,tf2::Quaternion& data_to){
     data_to = tf2::Quaternion(data_from->quaternion.x, data_from->quaternion.y, data_from->quaternion.z, data_from->quaternion.w);
+}
+
+template <> void castMsgFromROS<geometry_msgs::PoseStamped,Pose_data>(geometry_msgs::PoseStamped& data_from,Pose_data& data_to){
+    // TODO: hazem implement
 }
 
     

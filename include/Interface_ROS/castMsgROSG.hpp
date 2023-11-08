@@ -52,6 +52,9 @@ template <> void castMsgToROS<MRFT_parameters,hear_msgs::Update_Controller_MRFT>
 
 template <> void castMsgToROS<PID_parameters,hear_msgs::Update_Controller_PID>(PID_parameters& data_from,hear_msgs::Update_Controller_PID& data_to) ;
 
+template <> void castMsgToROS<Pose_data,geometry_msgs::PoseStamped>(Pose_data& data_from,geometry_msgs::PoseStamped& data_to) ;
+
+
 template <typename T,typename U> void castMsgFromROS(T& data_from,U& data_to) 
 { 
     throw std::runtime_error("Invalid castMsgFromROS function signature in ROSUnit_Client");
@@ -85,6 +88,8 @@ template <> void castMsgFromROS<hear_msgs::Update_Controller_PID::Request,PID_pa
 template <> void castMsgFromROS<hear_msgs::Update_Trajectory::Request,Trajectory_parameters>(hear_msgs::Update_Trajectory::Request& data_from,Trajectory_parameters& data_to);
 
 template <> void castMsgFromROS<geometry_msgs::QuaternionStamped::ConstPtr,tf2::Quaternion>(geometry_msgs::QuaternionStamped::ConstPtr& data_from,tf2::Quaternion& data_to);
+
+template <> void castMsgFromROS<geometry_msgs::PoseStamped,Pose_data>(geometry_msgs::PoseStamped& data_from,Pose_data& data_to) ;
 
 
 }
