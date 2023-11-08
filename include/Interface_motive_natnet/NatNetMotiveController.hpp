@@ -16,7 +16,9 @@ namespace HEAR{
 
 class NatNetMotiveController: public InterfaceController , public CallbackG<std::tuple<size_t, char *>>, public CallerKeyed<int,OptiTrackRigidBodyData> {
 private:
-SharedMemory<std::vector<OptiTrackRigidBodyData>> rigid_bodies_shmem;
+// SharedMemory<std::vector<OptiTrackRigidBodyData>> rigid_bodies_shmem;
+SharedMemory<OptiTrackRigidBodyData> rigid_bodies_shmem;
+
 public:
 
 NatNetMotiveController();
