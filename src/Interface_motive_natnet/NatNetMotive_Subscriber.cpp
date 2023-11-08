@@ -15,12 +15,20 @@ NatNetMotive_Subscriber::NatNetMotive_Subscriber(NatNetMotiveController* motive_
 void NatNetMotive_Subscriber::callbackPerform(OptiTrackRigidBodyData rigid_body_data){
     _output_port_position->write(rigid_body_data.pos);
     _output_port_ori_quat->write(rigid_body_data.quat);
-    std::cout << "Rigid Body received, id:" << rigid_body_data.id << ", pos: " <<rigid_body_data.pos.x << ","<<
-    rigid_body_data.pos.y << ","<< rigid_body_data.pos.z << ", quat: " << rigid_body_data.quat.getW() << ","<< 
-    rigid_body_data.quat.getX() << ","<< rigid_body_data.quat.getY() << ","<< rigid_body_data.quat.getZ() <<std::endl;
+    // std::cout << "Rigid Body received, id:" << rigid_body_data.id << ", pos: " <<rigid_body_data.pos.x << ","<<
+    // rigid_body_data.pos.y << ","<< rigid_body_data.pos.z << ", quat: " << rigid_body_data.quat.getW() << ","<< 
+    // rigid_body_data.quat.getX() << ","<< rigid_body_data.quat.getY() << ","<< rigid_body_data.quat.getZ() <<std::endl;
 }
 
-void NatNetMotive_Subscriber::process() {}
+void NatNetMotive_Subscriber::process() {
+    // OptiTrackRigidBodyData rigid_body_data;
+    // rigid_body_data.pos.x=1.0;
+    // _output_port_position->write(rigid_body_data.pos);
+    // _output_port_ori_quat->write(rigid_body_data.quat);
+    // std::cout << "Rigid Body received, id:" << rigid_body_data.id << ", pos: " <<rigid_body_data.pos.x << ","<<
+    // rigid_body_data.pos.y << ","<< rigid_body_data.pos.z << ", quat: " << rigid_body_data.quat.getW() << ","<< 
+    // rigid_body_data.quat.getX() << ","<< rigid_body_data.quat.getY() << ","<< rigid_body_data.quat.getZ() <<std::endl;
+}
 
 void NatNetMotive_Subscriber::processAsync() {}
 
