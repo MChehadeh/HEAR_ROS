@@ -107,6 +107,9 @@ template <> void castMsgToROS<Pose_data,geometry_msgs::PoseStamped>(Pose_data& d
     data_to.pose.orientation.y = data_from.quat.getY();
     data_to.pose.orientation.z = data_from.quat.getZ();
     data_to.pose.orientation.w = data_from.quat.getW();
+
+    data_to.header.frame_id = "World"; //TODO AA: better setting of frame id
+    data_to.header.stamp = ros::Time::now();
 }
 
 
