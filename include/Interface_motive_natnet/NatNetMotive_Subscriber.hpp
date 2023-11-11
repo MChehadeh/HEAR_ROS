@@ -21,7 +21,7 @@ enum OP {OUTPUT_POS,OUTPUT_QUAT};
 
 std::string getTypeDescription();
 
-NatNetMotive_Subscriber(int rigid_body_id,NatNetMotiveController* motive_ctrl_para);
+NatNetMotive_Subscriber(NatNetMotiveController* motive_ctrl_para,int rigid_body_id);
 
 void callbackPerform(OptiTrackRigidBodyData rigid_body_data);
 

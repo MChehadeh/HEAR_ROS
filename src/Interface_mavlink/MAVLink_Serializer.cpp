@@ -25,7 +25,7 @@ namespace HEAR {
         data->pressure_alt,
         data->temperature,
         data->fields_updated,
-        data->id);
+        id);
     }
 
     //TODO AA: add serializers for other messages
@@ -97,4 +97,16 @@ namespace HEAR {
         data->custom_mode,
         data->system_status);
     }
+
+    // template <> void serializeMessage(mavlink_actuator_motors_t* data, mavlink_message_t &msg_data){
+    //     //TODO AA: we need to set the id, system_id, and component_id from the mavlink controller
+    //     //TODO AA with MK: add time stamp 
+    //     uint8_t id = 0; // Set the value of the id parameter here
+    //     uint8_t system_id = 1;
+    //     uint8_t component_id = 0x33;        
+    //     mavlink_msg_actuator_motors_pack(system_id,
+    //     component_id,
+    //     &msg_data,
+    //     &data->control[0]};
+    // }
 }

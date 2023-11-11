@@ -8,6 +8,7 @@
 #include <std_msgs/Int32.h>
 #include <geometry_msgs/Point.h>
 #include <geometry_msgs/QuaternionStamped.h>
+#include <geometry_msgs/PoseStamped.h>
 #include <hear_msgs/set_bool.h>
 #include <hear_msgs/set_int.h>
 #include <hear_msgs/set_float.h>
@@ -24,10 +25,6 @@
 
 #include <stdexcept>
 
-#ifdef PX4
-    #include <mavros_msgs/VehicleAttitude.h>
-    #include <mavros_msgs/VehicleAngularVelocity.h>
-#endif
 
 namespace HEAR {
 
@@ -60,7 +57,7 @@ struct ROSServiceTypeTranslator<bool> {
 
 template <>
 struct ROSServiceTypeTranslator<Vector3D<float>> {
-    using ROSType = geometry_msgs::Point;
+    using ROSType = hear_msgs::set_point;
 };
 
 template <>
@@ -118,19 +115,13 @@ struct ROSTopicTypeTranslator<std::vector<float>> {
     using ROSType = std_msgs::Float32MultiArray;
 };
 
-
-#ifdef PX4
 template <>
-struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Att_data> {
-    using ROSType = mavros_msgs::VehicleAttitude;
+struct ROSTopicTypeTranslator<Pose_data> {
+    using ROSType = geometry_msgs::PoseStamped;
 };
 
-template <>
-struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Ang_Vel_data> {
-    using ROSType = mavros_msgs::VehicleAngularVelocity;
-};
-#endif
 }
+
 // int main() {
 //     using OriginalType = int;
 //     using Translator = TypeTranslator<OriginalType>;

@@ -15,16 +15,17 @@
 
 #include "Interface_motive_natnet/NatNetMotiveController.hpp"
 
+#ifdef VCPKG
 #include "Interface_JSON_wrapper/JsonWrapperIOController.hpp"
 #include "Interface_JSON_wrapper/JsonWrapperClient.hpp"
 #include "Interface_JSON_wrapper/JsonWrapperPublisher.hpp"
 #include "Interface_JSON_wrapper/JsonWrapperServer.hpp"
 #include "Interface_JSON_wrapper/JsonWrapperSubscriber.hpp"
-
+#endif
 
 #include <string>
 #include <iostream>
-using namespace std;
+// using namespace std;
 
 
 namespace HEAR{
@@ -34,6 +35,7 @@ class ROS2{};
 class SystemConnector{};
 class JsonWrapper{};
 class MAVLink{};
+class NatNetMotive{};
 
 class InterfaceFactoryBase {
 private:
@@ -98,7 +100,7 @@ SystemConnectorSync<U>* createPublisher(std::string uri){
 }
 };
 
-
+#ifdef VCPKG
 template <>
 class InterfaceFactory<JsonWrapper> : public InterfaceFactoryBase{
 
@@ -125,7 +127,7 @@ JsonWrapperPublisher<U>* createPublisher(std::string uri){
 }
 
 };
-
+#endif
 //Interface Factory for MAVLink
 template <>
 class InterfaceFactory<MAVLink> : public InterfaceFactoryBase{
@@ -145,6 +147,18 @@ MAVLink_Publisher<U>* createPublisher(std::string uri){
 
 };
 
+
+template <>
+class InterfaceFactory<NatNetMotive> : public InterfaceFactoryBase{
+
+public:
+InterfaceFactory(){
+
+}
+NatNetMotive_Subscriber* createSubscriber(int rigid_body_id){
+    return new NatNetMotive_Subscriber((NatNetMotiveController*)this->getController(),rigid_body_id);
+}
+};
 
 
 }

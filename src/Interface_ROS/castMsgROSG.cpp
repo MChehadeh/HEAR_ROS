@@ -27,6 +27,7 @@ template <> void castMsgToROS<float,std_msgs::Float32>(float& data_from,std_msgs
     data_to.data=data_from; 
 }
 
+//TODO AA check below
 template <> void castMsgToROS<Vector3D<float>,hear_msgs::set_point>(Vector3D<float>& data_from,hear_msgs::set_point& data_to) 
 { 
     data_to.request.x=data_from.x;
@@ -97,14 +98,19 @@ template <> void castMsgToROS<Trajectory_parameters,hear_msgs::Update_Trajectory
     data_to.request.trajectory_parameters.ClearQ = data_from.ClearQ;
 }
 
-template <> void castMsgToROS<PX4_MAVROS_Vehicle_Att_data,mavros_msgs::VehicleAttitude>(PX4_MAVROS_Vehicle_Att_data& data_from,mavros_msgs::VehicleAttitude& data_to){
-    // data_from.att_quat=tf2::Quaternion(data_to->q_x, data_to->q_y, data_to->q_z, data_to->q_w );
+template <> void castMsgToROS<Pose_data,geometry_msgs::PoseStamped>(Pose_data& data_from,geometry_msgs::PoseStamped& data_to){
+    data_to.pose.position.x = data_from.position.x;
+    data_to.pose.position.y = data_from.position.y;
+    data_to.pose.position.z = data_from.position.z;
+
+    data_to.pose.orientation.x = data_from.quat.getX();
+    data_to.pose.orientation.y = data_from.quat.getY();
+    data_to.pose.orientation.z = data_from.quat.getZ();
+    data_to.pose.orientation.w = data_from.quat.getW();
+
+    data_to.header.frame_id = "World"; //TODO AA: better setting of frame id
+    data_to.header.stamp = ros::Time::now();
 }
-
-template <> void castMsgToROS<PX4_MAVROS_Vehicle_Ang_Vel_data,mavros_msgs::VehicleAngularVelocity>(PX4_MAVROS_Vehicle_Ang_Vel_data& data_from,mavros_msgs::VehicleAngularVelocity& data_to){
-
-}
-
 
 
 
@@ -129,92 +135,96 @@ template <> void castMsgFromROS<hear_msgs::set_float::Request,float>(hear_msgs::
     data_to=data_from.data; 
 }
 
-template <> void castMsgFromROS<std_msgs::Float32,float>(std_msgs::Float32& data_from,float& data_to) 
+template <> void castMsgFromROS<std_msgs::Float32::ConstPtr,float>(std_msgs::Float32::ConstPtr& data_from,float& data_to) 
 { 
-    data_to=data_from.data; 
+    data_to=data_from->data; 
 }
 
-template <> void castMsgFromROS<hear_msgs::set_point,Vector3D<float>>(hear_msgs::set_point& data_from,Vector3D<float>& data_to) 
-{ 
-    data_to.x= data_from.request.x;
-    data_to.y= data_from.request.y;
-    data_to.z= data_from.request.z;
-}
-
-template <> void castMsgFromROS<Vector3D<float>,geometry_msgs::Point>(Vector3D<float>& data_from,geometry_msgs::Point& data_to) 
+//TODO AA check below
+template <> void castMsgFromROS<hear_msgs::set_point::Request,Vector3D<float>>(hear_msgs::set_point::Request& data_from,Vector3D<float>& data_to) 
 { 
     data_to.x= data_from.x;
     data_to.y= data_from.y;
     data_to.z= data_from.z;
 }
 
-template <> void castMsgFromROS<std_msgs::Float32MultiArray,std::vector<float>>(std_msgs::Float32MultiArray& data_from,std::vector<float>& data_to) 
+template <> void castMsgFromROS<geometry_msgs::Point::ConstPtr, Vector3D<float>>(geometry_msgs::Point::ConstPtr& data_from,Vector3D<float>& data_to) 
+{ 
+    data_to.x= data_from->x;
+    data_to.y= data_from->y;
+    data_to.z= data_from->z;
+}
+
+template <> void castMsgFromROS<std_msgs::Float32MultiArray::ConstPtr,std::vector<float>>(std_msgs::Float32MultiArray::ConstPtr& data_from,std::vector<float>& data_to) 
 { 
     throw std::logic_error("Function not yet implemented");
-    //data_to=data_from.request.data;
+    //data_to=data_from.data;
 }
 
-template <> void castMsgFromROS<hear_msgs::Update_Controller_Bounding,BoundingCtrl_parameters>(hear_msgs::Update_Controller_Bounding& data_from,BoundingCtrl_parameters& data_to) 
+template <> void castMsgFromROS<hear_msgs::Update_Controller_Bounding::Request,BoundingCtrl_parameters>(hear_msgs::Update_Controller_Bounding::Request& data_from,BoundingCtrl_parameters& data_to) 
 { 
-    data_to.id =data_from.request.controller_parameters.id;
-    data_to.eps_1 = data_from.request.controller_parameters.bounding_eps_1;
-    data_to.eps_2 = data_from.request.controller_parameters.bounding_eps_2;
-    data_to.h_o1 = data_from.request.controller_parameters.bounding_h_o1;
-    data_to.h_o2 = data_from.request.controller_parameters.bounding_h_o2;
+    data_to.id =data_from.controller_parameters.id;
+    data_to.eps_1 = data_from.controller_parameters.bounding_eps_1;
+    data_to.eps_2 = data_from.controller_parameters.bounding_eps_2;
+    data_to.h_o1 = data_from.controller_parameters.bounding_h_o1;
+    data_to.h_o2 = data_from.controller_parameters.bounding_h_o2;
 }
 
-template <> void castMsgFromROS<hear_msgs::Update_Controller_MRFT,MRFT_parameters>(hear_msgs::Update_Controller_MRFT& data_from,MRFT_parameters& data_to) 
+template <> void castMsgFromROS<hear_msgs::Update_Controller_MRFT::Request,MRFT_parameters>(hear_msgs::Update_Controller_MRFT::Request& data_from,MRFT_parameters& data_to) 
 { 
-     data_to.id = data_from.request.controller_parameters.id;
-     data_to.beta = data_from.request.controller_parameters.mrft_beta;
-     data_to.relay_amp = data_from.request.controller_parameters.mrft_relay_amp;
-     data_to.no_switch_delay_in_ms = data_from.request.controller_parameters.mrft_no_switch_delay;
-     data_to.num_of_peak_conf_samples = data_from.request.controller_parameters.mrft_conf_samples;
+     data_to.id = data_from.controller_parameters.id;
+     data_to.beta = data_from.controller_parameters.mrft_beta;
+     data_to.relay_amp = data_from.controller_parameters.mrft_relay_amp;
+     data_to.no_switch_delay_in_ms = data_from.controller_parameters.mrft_no_switch_delay;
+     data_to.num_of_peak_conf_samples = data_from.controller_parameters.mrft_conf_samples;
 }
 
-template <> void castMsgFromROS<hear_msgs::Update_Controller_PID,PID_parameters>(hear_msgs::Update_Controller_PID& data_from,PID_parameters& data_to) 
+template <> void castMsgFromROS<hear_msgs::Update_Controller_PID::Request,PID_parameters>(hear_msgs::Update_Controller_PID::Request& data_from,PID_parameters& data_to) 
 { 
-     data_to.id = data_from.request.controller_parameters.id;
-     data_to.kp = data_from.request.controller_parameters.pid_kp;
-     data_to.ki = data_from.request.controller_parameters.pid_ki;
-     data_to.kd = data_from.request.controller_parameters.pid_kd;
-     data_to.kdd= data_from.request.controller_parameters.pid_kdd;
-     data_to.anti_windup= data_from.request.controller_parameters.pid_anti_windup;
-     data_to.en_pv_derivation=data_from.request.controller_parameters.pid_en_pv_derivation;
-     data_to.dt=data_from.request.controller_parameters.pid_dt;
+     data_to.id = data_from.controller_parameters.id;
+     data_to.kp = data_from.controller_parameters.pid_kp;
+     data_to.ki = data_from.controller_parameters.pid_ki;
+     data_to.kd = data_from.controller_parameters.pid_kd;
+     data_to.kdd= data_from.controller_parameters.pid_kdd;
+     data_to.anti_windup= data_from.controller_parameters.pid_anti_windup;
+     data_to.en_pv_derivation=data_from.controller_parameters.pid_en_pv_derivation;
+     data_to.dt=data_from.controller_parameters.pid_dt;
 }
 
-template <> void castMsgFromROS<hear_msgs::Update_Trajectory,Trajectory_parameters>(hear_msgs::Update_Trajectory& data_from,Trajectory_parameters& data_to) 
+template <> void castMsgFromROS<hear_msgs::Update_Trajectory::Request,Trajectory_parameters>(hear_msgs::Update_Trajectory::Request& data_from,Trajectory_parameters& data_to) 
 { 
-     data_to._trajectoryType = data_from.request.trajectory_parameters.trajectoryType;
-     data_to._samplingType = data_from.request.trajectory_parameters.samplingType;
-     data_to._transformationType = data_from.request.trajectory_parameters.transformationType;
-     data_to.scale = data_from.request.trajectory_parameters.scale;
-     data_to.rot = data_from.request.trajectory_parameters.rot;
-     data_to.trans = data_from.request.trajectory_parameters.trans;
-     data_to.TotalExecutionTime = data_from.request.trajectory_parameters.TotalExecutionTime;
-     data_to.Velocity = data_from.request.trajectory_parameters.Velocity;
-     data_to.ClearQ =data_from.request.trajectory_parameters.ClearQ;
+     data_to._trajectoryType = data_from.trajectory_parameters.trajectoryType;
+     data_to._samplingType = data_from.trajectory_parameters.samplingType;
+     data_to._transformationType = data_from.trajectory_parameters.transformationType;
+     data_to.scale = data_from.trajectory_parameters.scale;
+     data_to.rot = data_from.trajectory_parameters.rot;
+     data_to.trans = data_from.trajectory_parameters.trans;
+     data_to.TotalExecutionTime = data_from.trajectory_parameters.TotalExecutionTime;
+     data_to.Velocity = data_from.trajectory_parameters.Velocity;
+     data_to.ClearQ =data_from.trajectory_parameters.ClearQ;
 }
 
-template <> void castMsgFromROS<geometry_msgs::Vector3Stamped,Vector3D<float>>(geometry_msgs::Vector3Stamped& data_from,Vector3D<float>& data_to){
-    data_to.x = data_from.vector.x;
-    data_to.y = data_from.vector.y;
-    data_to.z = data_from.vector.z;
+// template <> void castMsgFromROS<geometry_msgs::Vector3Stamped,Vector3D<float>>(geometry_msgs::Vector3Stamped& data_from,Vector3D<float>& data_to){
+//     data_to.x = data_from.vector.x;
+//     data_to.y = data_from.vector.y;
+//     data_to.z = data_from.vector.z;
+// }
+
+template <> void castMsgFromROS<geometry_msgs::QuaternionStamped::ConstPtr,tf2::Quaternion>(geometry_msgs::QuaternionStamped::ConstPtr& data_from,tf2::Quaternion& data_to){
+    data_to = tf2::Quaternion(data_from->quaternion.x, data_from->quaternion.y, data_from->quaternion.z, data_from->quaternion.w);
 }
 
-template <> void castMsgFromROS<geometry_msgs::QuaternionStamped,tf2::Quaternion>(geometry_msgs::QuaternionStamped& data_from,tf2::Quaternion& data_to){
-    data_to = tf2::Quaternion(data_from.quaternion.x, data_from.quaternion.y, data_from.quaternion.z, data_from.quaternion.w);
+template <> void castMsgFromROS<geometry_msgs::PoseStamped,Pose_data>(geometry_msgs::PoseStamped& data_from,Pose_data& data_to){
+    data_to.position.x = data_from.pose.position.x;
+    data_to.position.y = data_from.pose.position.y;
+    data_to.position.z = data_from.pose.position.z;
+
+    data_to.quat.setX(data_from.pose.orientation.x);
+    data_to.quat.setY(data_from.pose.orientation.y);
+    data_to.quat.setZ(data_from.pose.orientation.z);
+    data_to.quat.setW(data_from.pose.orientation.w);
 }
 
-//TODO AA: remove below and mavros dependancy
-template <> void castMsgFromROS<mavros_msgs::VehicleAttitude,PX4_MAVROS_Vehicle_Att_data>(mavros_msgs::VehicleAttitude& data_from,PX4_MAVROS_Vehicle_Att_data& data_to){
-    // data_to.att_quat=tf2::Quaternion(data_from->q_x, data_from->q_y, data_from->q_z, data_from->q_w );
-}
-
-template <> void castMsgFromROS<mavros_msgs::VehicleAngularVelocity,PX4_MAVROS_Vehicle_Ang_Vel_data>(mavros_msgs::VehicleAngularVelocity& data_from,PX4_MAVROS_Vehicle_Ang_Vel_data& data_to){
-    
-}
     
 }
 

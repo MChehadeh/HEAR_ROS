@@ -7,7 +7,7 @@
 #include "HEAR_core/CallerKeyed.hpp"
 #include "sync_io_drivers/IOWriter.hpp"
 
-#include "mavlink.h"
+#include "mavlink/common/mavlink.h"
 
 namespace HEAR{
 class MAVLinkController: public InterfaceController, public CallbackG<std::tuple<size_t,char*>>, public CallerKeyed<int,mavlink_message_t> {
@@ -38,7 +38,8 @@ void writeMAVLinkMsgToIO(mavlink_message_t& msg){
     int len = mavlink_msg_to_send_buffer(buffer, &msg);
     io_writer->writeData(len,(char*)buffer);
 }
-
+/// @brief Only constructor for MAVLinkController class
+/// @param io_writer_para is IOWriter pointer like 
 MAVLinkController(IOWriter* io_writer_para) : io_writer(io_writer_para) {}
 
 ~MAVLinkController(){}
