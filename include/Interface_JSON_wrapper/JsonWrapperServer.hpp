@@ -24,7 +24,7 @@ public:
     }
     void callbackPerform(T ipc_msg)
     {
-        std::cout << "from JsonWrapperServer callbackPerform ...." << ipc_msg<< std::endl;
+        //std::cout << "from JsonWrapperServer callbackPerform ...." << ipc_msg<< std::endl;
         out->write_AsyncOP(ipc_msg);
 
     }

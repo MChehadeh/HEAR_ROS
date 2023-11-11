@@ -30,7 +30,7 @@ void callbackPerform(const std::tuple<size_t,char*> data_received) override{
     string msg = std::get<1>(data_received);
     const auto [uri, msg_type, strigified_Paylaod] = JW.deWrap_msg(msg);
     string str_paload = strigified_Paylaod;
-    cout << "str_paload from callbackPerform is : " << str_paload << endl;
+    //cout << "str_paload from callbackPerform is : " << str_paload << endl;
 
     //json jsonData = JW.parse(str_paload);
     //string par = JW.dump(jsonData);

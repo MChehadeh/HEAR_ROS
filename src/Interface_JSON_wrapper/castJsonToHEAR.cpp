@@ -85,9 +85,15 @@ template <> void castJsonToHEAR<Trajectory_parameters>(json& j,Trajectory_parame
     data.TotalExecutionTime=j["TotalExecutionTime"].GetFloat();
     data.Velocity=j["Velocity"].GetFloat();
     data.ClearQ=j["ClearQ"].GetInt();
-    loadVectorArray<float>(j["scale"].GetArray(), data.scale);
-    loadVectorArray<float>(j["rot"].GetArray(), data.rot);
-    loadVectorArray<float>(j["trans"].GetArray(), data.trans);
+    Value scaleArr;
+    scaleArr = j["scale"].GetArray();
+    Value rotArr;
+    rotArr = j["rot"].GetArray();
+    Value transArr;
+    transArr = j["trans"].GetArray();
+    loadVectorArray<float>(scaleArr, data.scale);
+    loadVectorArray<float>(rotArr, data.rot);
+    loadVectorArray<float>(transArr, data.trans);
 
 }
 
