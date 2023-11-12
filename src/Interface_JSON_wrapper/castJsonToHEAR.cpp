@@ -2,7 +2,7 @@
 
 namespace HEAR{
 
-// template <> void castJsonToData<LicenseCheck_response>(json& j, LicenseCheck_response& data)
+// template <> void castJsonToData<LicenseCheck_response>(json_doc& j, LicenseCheck_response& data)
 // { 
 //     data.isDroneExist =j["isDroneExist"].GetBool();
 //     data.isDroneLicensed =j["isDroneLicensed"].GetBool();
@@ -10,7 +10,7 @@ namespace HEAR{
 // }
 
 
-template <> void castJsonToHEAR<PID_parameters>(json& j,PID_parameters& data) 
+template <> void castJsonToHEAR<PID_parameters>(json_doc& j,PID_parameters& data) 
 { 
     // data.id=j["id"];
     // data.kp=j["kp"];
@@ -31,7 +31,7 @@ template <> void castJsonToHEAR<PID_parameters>(json& j,PID_parameters& data)
     data.dt=j["dt"].GetDouble();
 
 }
-template <> void castJsonToHEAR<BoundingCtrl_parameters>(json& j,BoundingCtrl_parameters& data) 
+template <> void castJsonToHEAR<BoundingCtrl_parameters>(json_doc& j,BoundingCtrl_parameters& data) 
 { 
     // data.id=j["id"];
     // data.eps_1=j["eps_1"];
@@ -47,7 +47,7 @@ template <> void castJsonToHEAR<BoundingCtrl_parameters>(json& j,BoundingCtrl_pa
 
 }
 
-template <> void castJsonToHEAR<MRFT_parameters>(json& j,MRFT_parameters& data) 
+template <> void castJsonToHEAR<MRFT_parameters>(json_doc& j,MRFT_parameters& data) 
 { 
     // data.id=j["id"];
     // data.beta=j["beta"];
@@ -65,7 +65,7 @@ template <> void castJsonToHEAR<MRFT_parameters>(json& j,MRFT_parameters& data)
 
 }
 
-template <> void castJsonToHEAR<Trajectory_parameters>(json& j,Trajectory_parameters& data) 
+template <> void castJsonToHEAR<Trajectory_parameters>(json_doc& j,Trajectory_parameters& data) 
 { 
     // data._trajectoryType=j["_trajectoryType"];
     // data._samplingType=j["_samplingType"];
@@ -98,14 +98,14 @@ template <> void castJsonToHEAR<Trajectory_parameters>(json& j,Trajectory_parame
 }
 
 
-template <> void castJsonToHEAR<float>(json& j,float& data,std::string _field_name) 
+template <> void castJsonToHEAR<float>(json_doc& j,float& data,std::string _field_name) 
 { 
     // data=j[_field_name];
 
     data= j[_field_name.c_str()].GetFloat();
 }
 
-template <> void castJsonToHEAR<std::vector<float>>(json& j,std::vector<float>& data,std::string _field_name) 
+template <> void castJsonToHEAR<std::vector<float>>(json_doc& j,std::vector<float>& data,std::string _field_name) 
 { 
     // data=j[_field_name].get<std::vector<float>>();
 

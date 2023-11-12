@@ -8,7 +8,7 @@
 #include "http/HTTPRequest.hpp"
 #include "onnx/onnx.hpp"
 namespace HEAR {
-    inline void castHEARtoJson(json& j,std::vector<float>& data) 
+    inline void castHEARtoJson(json_doc& j,std::vector<float>& data) 
 { 
 
     j.SetObject();
@@ -53,14 +53,14 @@ public:
             T data;
             inp->read_AsyncIP(data);
 
-            json j;
-            // onnx msg to json
+            json_doc j;
+            // onnx msg to json_doc
             castHEARtoJson(j, data);
-            // generate result json message
+            // generate result json_doc message
             //std::string uri = uri;
             std::string msg_type = "onnx";
             Json_Wrapper jw;
-            json msg = jw.wrap_msg(j, uri, msg_type);
+            json_doc msg = jw.wrap_msg(j, uri, msg_type);
 
             // send reuslts to drone
             std::string json_payload = jw.dump(msg);
